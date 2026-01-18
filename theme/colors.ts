@@ -1,57 +1,62 @@
 /**
  * 술렌다 컬러 시스템
- * 에메랄드 그린 기반 미니멀 디자인 (피그마 디자인 반영)
+ * TDS (Toss Design System) Green 기반
  */
 
+import { colors as tdsColors } from '@toss/tds-react-native';
+
 export const colors = {
-  // Primary - 에메랄드 그린 계열
+  // Primary - TDS Green 계열
   primary: {
-    light: '#A7F3D0',    // emerald-200
-    main: '#10B981',     // emerald-500
-    dark: '#059669',     // emerald-600
-    gradient: ['#D1FAE5', '#10B981'] as const,
+    light: tdsColors.green100,      // #aeefd5
+    main: tdsColors.green500,       // #03b26c
+    dark: tdsColors.green600,       // #02a262
+    gradient: [tdsColors.green50, tdsColors.green500] as const,
   },
 
-  // Background - 민트빛 그라데이션
+  // Background
   background: {
-    primary: '#F0FDF4',     // emerald-50
-    secondary: '#FFFFFF',
-    card: 'rgba(255, 255, 255, 0.95)',
+    primary: tdsColors.green50,     // #f0faf6
+    secondary: tdsColors.background, // #FFFFFF
+    card: tdsColors.background,
     glass: 'rgba(255, 255, 255, 0.7)',
-    gradient: ['#F0FDF4', '#ECFDF5'] as const,
+    gradient: [tdsColors.green50, tdsColors.background] as const,
   },
 
-  // Text
+  // Text - TDS Grey 계열
   text: {
-    primary: '#1F2937',     // gray-800
-    secondary: '#6B7280',   // gray-500
-    muted: '#9CA3AF',       // gray-400
-    inverse: '#FFFFFF',
+    primary: tdsColors.grey900,     // #191f28
+    secondary: tdsColors.grey600,   // #6b7684
+    muted: tdsColors.grey400,       // #b0b8c1
+    inverse: tdsColors.background,  // #FFFFFF
   },
 
   // Accent
   accent: {
-    success: '#22C55E',     // green-500
-    warning: '#F59E0B',     // amber-500
-    error: '#EF4444',       // red-500
-    info: '#3B82F6',        // blue-500
+    success: tdsColors.green500,    // #03b26c
+    warning: tdsColors.orange500,   // #fe9800
+    error: tdsColors.red500,        // #f04452
+    info: tdsColors.blue500,        // #3182f6
   },
 
   // Border & Divider
   border: {
-    light: 'rgba(0, 0, 0, 0.04)',
-    default: 'rgba(0, 0, 0, 0.08)',
+    light: tdsColors.greyOpacity50,
+    default: tdsColors.grey200,     // #e5e8eb
   },
 
-  // Drink type colors (주종별 컬러) - 투톤 스타일
+  // Drink type colors (주종별 컬러)
   drinks: {
-    soju: '#22C55E',       // 초록 - 소주
-    beer: '#F59E0B',       // 앰버 - 맥주
-    wine: '#DC2626',       // 레드 - 와인
-    whiskey: '#D97706',    // 앰버/오렌지 - 위스키
-    makgeolli: '#A1A1AA',  // 그레이 - 막걸리
-    etc: '#71717A',        // 다크그레이 - 기타
+    soju: tdsColors.green500,       // 초록 - 소주
+    beer: tdsColors.orange500,      // 앰버 - 맥주
+    wine: tdsColors.red500,         // 레드 - 와인
+    whiskey: tdsColors.orange700,   // 앰버/오렌지 - 위스키
+    makgeolli: tdsColors.grey400,   // 그레이 - 막걸리
+    etc: tdsColors.grey600,         // 다크그레이 - 기타
   },
+
+  // TDS 원본 colors 참조용
+  tds: tdsColors,
 } as const;
 
 export type Colors = typeof colors;

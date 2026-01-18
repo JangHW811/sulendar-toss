@@ -1,26 +1,38 @@
 /**
  * 술렌다 Input 컴포넌트
- * 텍스트 입력 필드
+ * TDS TextField 기반 래퍼
  */
 
 import React from 'react';
-import {
-  TextInput,
-  TextInputProps,
-  View,
-  StyleSheet,
-} from 'react-native';
-import { colors } from '../../theme/colors';
-import { spacing, borderRadius } from '../../theme/spacing';
-import { typography } from '../../theme/typography';
+import { TextField } from '@toss/tds-react-native';
+import { View, StyleSheet } from 'react-native';
 import { Text } from './Text';
 
-interface InputProps extends TextInputProps {
+interface InputProps {
   label?: string;
+  placeholder?: string;
+  value?: string;
+  onChangeText?: (text: string) => void;
   error?: string;
+  secureTextEntry?: boolean;
+  keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+  multiline?: boolean;
+  numberOfLines?: number;
 }
 
-export function Input({ label, error, style, ...props }: InputProps) {
+export function Input({
+  label,
+  placeholder,
+  value,
+  onChangeText,
+  error,
+  secureTextEntry,
+  keyboardType = 'default',
+  autoCapitalize = 'none',
+  multiline = false,
+  numberOfLines,
+}: InputProps) {
   return (
     <View style={styles.container}>
       {label && (
@@ -28,17 +40,19 @@ export function Input({ label, error, style, ...props }: InputProps) {
           {label}
         </Text>
       )}
-      <TextInput
-        style={[
-          styles.input,
-          error && styles.inputError,
-          style,
-        ]}
-        placeholderTextColor={colors.text.muted}
-        {...props}
+      <TextField
+        placeholder={placeholder}
+        value={value}
+        onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+        autoCapitalize={autoCapitalize}
+        multiline={multiline}
+        numberOfLines={numberOfLines}
+        status={error ? 'error' : undefined}
       />
       {error && (
-        <Text variant="small" style={styles.error}>
+        <Text variant="small" color="red" style={styles.error}>
           {error}
         </Text>
       )}
@@ -48,26 +62,12 @@ export function Input({ label, error, style, ...props }: InputProps) {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: spacing.md,
+    marginBottom: 16,
   },
   label: {
-    marginBottom: spacing.xs,
-  },
-  input: {
-    ...typography.body,
-    backgroundColor: colors.background.card,
-    borderWidth: 1,
-    borderColor: colors.border.default,
-    borderRadius: borderRadius.md,
-    paddingVertical: spacing.md - 4,
-    paddingHorizontal: spacing.md,
-    color: colors.text.primary,
-  },
-  inputError: {
-    borderColor: colors.accent.error,
+    marginBottom: 4,
   },
   error: {
-    color: colors.accent.error,
-    marginTop: spacing.xs,
+    marginTop: 4,
   },
 });

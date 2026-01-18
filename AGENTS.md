@@ -33,11 +33,11 @@ sulendar-toss/
 | Task | Location | Notes |
 |------|----------|-------|
 | 새 페이지 추가 | `pages/*.tsx` | `createRoute('/{path}')` 사용 |
-| UI 컴포넌트 | `components/ui/` | Text, Button, Card, Input 재사용 |
+| UI 컴포넌트 | `components/ui/` | TDS 기반 래퍼 (Text, Button, Card, Input) |
 | API 호출 | `services/*.ts` | Supabase 쿼리 |
 | 데이터 페칭 | `hooks/use*.ts` | TanStack Query 훅 |
 | 인증 로직 | `context/AuthContext.tsx` | 토스 로그인 연동 |
-| 디자인 토큰 | `theme/colors.ts` | Primary: #10B981 (에메랄드) |
+| 디자인 토큰 | `theme/colors.ts` | TDS Green 기반 (#03b26c) |
 | 타입 정의 | `types/index.ts` | DrinkType, DRINK_INFO 상수 |
 | AI 상담 | `services/gemini.ts` | Gemini 1.5 Flash API |
 
@@ -63,10 +63,22 @@ function rowToLog(row: DrinkLogRow): DrinkLog { ... }
 const { data, isLoading } = useDrinkLogsByMonth(year, month);
 ```
 
-### 컬러 시스템
-- Primary: `colors.primary.main` (#10B981)
-- Background: `colors.background.primary` (#F0FDF4)
-- 주종별: `colors.drinks.soju`, `.beer`, `.wine` 등
+### TDS 컬러 시스템
+```typescript
+import { colors } from '@toss/tds-react-native';
+// Primary: colors.green500 (#03b26c)
+// Background: colors.green50 (#f0faf6)
+// Text: colors.grey900, grey600, grey400
+// Error: colors.red500
+```
+
+### 컴포넌트 사용
+```typescript
+// TDS 래퍼 컴포넌트
+import { Text, Button, Card, Input } from '../components/ui';
+// TDS 직접 사용
+import { Badge, ListRow, Tab, Loader } from '../components/ui';
+```
 
 ## ANTI-PATTERNS
 
@@ -86,10 +98,10 @@ const { data, isLoading } = useDrinkLogsByMonth(year, month);
 ```
 
 - [ ] `yarn install` 실행
-- [ ] 토스 로그인 실제 연동 (`@apps-in-toss/framework` 주석 해제)
-- [ ] TDS 컴포넌트 적용 (`@toss/tds-react-native`)
+- [ ] 토스 로그인 실제 연동 (`appLogin` 사용)
 - [ ] 인앱 광고 연동 (AI 상담 리워드)
 - [ ] 샌드박스 테스트
+- [x] TDS 컴포넌트 적용 완료
 
 ## DB SCHEMA
 

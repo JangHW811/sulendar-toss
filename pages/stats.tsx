@@ -8,10 +8,9 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  ActivityIndicator,
 } from 'react-native';
 import { createRoute } from '@granite-js/react-native';
-import { Text, Card } from '../components/ui';
+import { Text, Card, Loader } from '../components/ui';
 import { colors } from '../theme/colors';
 import { spacing, borderRadius } from '../theme/spacing';
 import { DRINK_INFO, DrinkType } from '../types';
@@ -90,7 +89,7 @@ function StatsPage() {
   if (isLoading) {
     return (
       <View style={[styles.container, styles.centerContent]}>
-        <ActivityIndicator size="large" color={colors.primary.main} />
+        <Loader size="large" />
       </View>
     );
   }
